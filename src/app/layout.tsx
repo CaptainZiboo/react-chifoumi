@@ -5,9 +5,13 @@ import {
 } from "@/components/ui/navigation-menu";
 import { MatchesProvider } from "@/context/matches";
 import { getAuth } from "@/lib/storage";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 
 export const RootLayout: React.FC = () => {
+  const auth = getAuth();
+
+  if (!auth) return <Navigate to={"/sign-in"} />;
+
   return (
     <>
       <MatchesProvider>
